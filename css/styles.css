@@ -16,7 +16,7 @@ body {
 }
 
 
-/* Typeography General*/
+/* Typography General*/
 h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 3em;
@@ -69,6 +69,8 @@ section {
 
 .navbar__menu li {
     display: inline-block;
+    padding: 1em;
+    color: rgba(0,13,60,1);
 }
 
 .navbar__menu .menu__link {
