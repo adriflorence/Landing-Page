@@ -42,6 +42,12 @@ p {
     color: #eee;
 }
 
+blockquote {
+    padding: 2em;
+    background-color: #1ac79c;
+    background-blend-mode: multiply;
+}
+
 /* ---- Layout Rules ---- */
 main {
     margin: 10vh 1em 10vh;
@@ -85,6 +91,19 @@ section {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
+    cursor: pointer;
+}
+
+/* back to top button style */
+#to_top {
+    position: fixed;
+    left: 45%;
+    bottom: 2em;
+    background-color: coral;
+    border: none;
+    color: white;
+    padding: 1em;
+    cursor: pointer;
 }
 
 /* Header Styles */
