@@ -19,7 +19,7 @@
 */
 
 const sections = document.getElementsByTagName('section');
-const navbar__list = document.getElementById('navbar__list');
+const navbar = document.getElementById('navbar__list');
 
 /**
  * End Global Variables
@@ -42,6 +42,16 @@ function isElementInViewport (el) {
     );
 }
 
+
+// Scroll to section on link click using scrollTO event
+function scrollToElement() {
+    navbar.addEventListener('click', function (event) {
+        console.log(event);
+        const clicked = document.querySelector('#' + event.target.dataset.nav)
+        clicked.scrollIntoView();
+    });
+};
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -49,30 +59,29 @@ function isElementInViewport (el) {
 */
 
 // build the nav
-const fragment = document.createDocumentFragment();
+function buildMenu(){
+    const fragment = document.createDocumentFragment();
 
-// traditional for loop is used so the index can be added to the href attribute
-for(let i = 0; i < sections.length; i++){
-    let section = sections[i];
-    let index = i + 1;
-    let title = section.querySelector('h2').textContent;
-    let listElement = document.createElement('li');
-
-    // create anchor tag and with section title text
-    let anchor = document.createElement('a');
-    anchor.setAttribute('href', '#section' + index);
-    anchor.classList.add('menu__link');
-    anchor.textContent = title;
-
-    // append anchor to list element, and list element to document fragment
-    listElement.appendChild(anchor);
-    fragment.appendChild(listElement);
+    for(const section of sections){
+        let title = section.querySelector('h2').textContent;
+        let listElement = document.createElement('li');
+    
+        // create anchor tag and with section title text
+        let anchor = document.createElement('a');
+        anchor.classList.add('menu__link');
+        anchor.dataset.nav = section.id;
+        anchor.textContent = title;
+    
+        // append anchor to list element, and list element to document fragment
+        listElement.appendChild(anchor);
+        fragment.appendChild(listElement);
+    }
+    
+    navbar.appendChild(fragment);
 }
 
-navbar__list.appendChild(fragment);
 
-
-
+// Add functionality to distinguish the section in view
 // Add class 'active' to section when near top of viewport
 document.addEventListener('scroll', function() {
     for(section of sections){
@@ -84,8 +93,6 @@ document.addEventListener('scroll', function() {
     }
 });
 
-// Scroll to anchor ID using scrollTO event
-
 
 /**
  * End Main Functions
@@ -94,8 +101,7 @@ document.addEventListener('scroll', function() {
 */
 
 // Build menu 
+buildMenu();
 
 // Scroll to section on link click
-
-// Set sections as active
-
+scrollToElement();
