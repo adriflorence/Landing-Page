@@ -22,6 +22,9 @@
 
 const sections = document.getElementsByTagName('section');
 const navbar = document.getElementById('navbar__list');
+// Add a scroll to top button on the page
+const toTopButton = document.getElementById('to_top');
+toTopButton.onclick = function() { backToTop() };
 
 /**
  * End Global Variables
@@ -30,12 +33,9 @@ const navbar = document.getElementById('navbar__list');
 */
 
 
+// method returns whether an element is in the viewport (boolean)
 function isElementInViewport (el) {
-
-    // method returns the size of an element
-    // and its position relative to the viewport
     var domRect = el.getBoundingClientRect();
-
     return (
         domRect.top >= 0 &&
         domRect.left >= 0 &&
@@ -65,7 +65,7 @@ function backToTop(){
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-// Scroll to section on link click using scrollTO event
+// Scroll to section on link click using scrollIntoView method
 function scrollToElement() {
     navbar.addEventListener('click', function (event) {
         console.log(event);
@@ -102,12 +102,6 @@ function buildMenu(){
     
     navbar.appendChild(fragment);
 }
-
-// Add a scroll to top button on the page
-// that’s only visible when the user scrolls below the fold
-const toTopButton = document.getElementById('to_top');
-toTopButton.onclick = function() { backToTop() };
-
 
 
 // Add functionality to distinguish the section in view
