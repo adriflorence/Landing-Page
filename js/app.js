@@ -18,7 +18,7 @@
  * 
 */
 
-const landing__containers = document.getElementsByClassName('landing__container');
+const sections = document.getElementsByTagName('section');
 const navbar__list = document.getElementById('navbar__list');
 
 /**
@@ -28,6 +28,19 @@ const navbar__list = document.getElementById('navbar__list');
 */
 
 
+function isElementInViewport (el) {
+
+    // method returns the size of an element
+    // and its position relative to the viewport
+    var domRect = el.getBoundingClientRect();
+
+    return (
+        domRect.top >= 0 &&
+        domRect.left >= 0 &&
+        domRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        domRect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
 /**
  * End Helper Functions
@@ -39,8 +52,8 @@ const navbar__list = document.getElementById('navbar__list');
 const fragment = document.createDocumentFragment();
 
 // traditional for loop is used so the index can be added to the href attribute
-for(let i = 0; i < landing__containers.length; i++){
-    let section = landing__containers[i];
+for(let i = 0; i < sections.length; i++){
+    let section = sections[i];
     let index = i + 1;
     let title = section.querySelector('h2').textContent;
     let listElement = document.createElement('li');
@@ -61,7 +74,15 @@ navbar__list.appendChild(fragment);
 
 
 // Add class 'active' to section when near top of viewport
-
+document.addEventListener('scroll', function() {
+    for(section of sections){
+        if(isElementInViewport(section)){
+            section.classList = "your-active-class";
+        } else {
+            section.classList = "";
+        }
+    }
+});
 
 // Scroll to anchor ID using scrollTO event
 
